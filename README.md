@@ -34,5 +34,7 @@
 ### 📦 Installation
 
 git clone https://github.com/Jeevanhs/FinVeda.git
+
 cd FinVeda
+
 npm install    # If using React or similar
