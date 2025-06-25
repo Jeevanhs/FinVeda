@@ -12,8 +12,6 @@
 - 📈 Data visualizations using charts and graphs
 - 📱 Responsive design for mobile and desktop
 - 🔐 Secure and privacy-focused architecture
-- 🎯 Minimalist UI inspired by [CustomFrontend](https://customfrontend.vercel.app)
-
 ---
 
 ## 🧩 Tech Stack
