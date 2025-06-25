@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../nav.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/income.css">
+    <link rel="stylesheet" href="css/expenses.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="header-area">
+        <div class="container">
+            <nav class="navbar-area">
+                <div class="navbar-wrapper">
+                    <div class="navbar-brand">
+                        <a href="./index.html">
+                            <img src="./assets/images/FinvedaLogo.png" alt="Finveda Logo" class="logo">
+                        </a>
+                    </div>
+                    <div class="navbar-search">
+                        <i class="fa-solid fa-magnifying-glass glass"></i>
+                        <div class="search-container">
+                            <input type="text" class="search-input" id="file-search" placeholder="Search for a file..." oninput="showSuggestions()" onkeydown="navigateSuggestions(event)">
+                            <div class="suggestions" id="suggestions-list"></div>
+                        </div>
+                    </div>
+                    <div class="navbar-nav">
+                        <ul id="nav" class="navbar-nav-list">
+                            <li class="nav-item">
+                                <a class="page-scroll active-link" href="./index.html"> Home🏡</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="page-scroll" href="./about.html">About Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="page-scroll" href="./persona/index.html">Plan and Save</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="page-scroll" href="./contact.html">Contact📞</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="page-scroll" href="./faq.html">Help🙋‍♂</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="page-scroll dropdown-toggle" href="#" role="button">Explore📚</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="./finance.html">Courses📚</a></li>
+                                    <li><a href="./trends.html">Trends📈</a></li>
+                                    <li><a href="./tools/sip.html">Tools🔧</a></li>
+                                    <li><a href="./blog.html">Blogs📰</a></li>
+                                    <li><a href="./quiz.html">Quiz🤔</a></li>
+                                    <li><a href="./Games/Games.html">Games</a></li>
+                                    <li><a href="./maps.html">Maps🗺</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item no-underline" id="auth-btn-container">
+                                <a class="main-btn navbar-btn" style="padding: 5px 20px;" href="./loginPage.html">
+                                    <i class="fas fa-user-circle icon-hover"></i> Login/Register💻
+                                </a>
+                            </li>
+                            <li class="nav-item no-underline align-self-center">
+                                <button id="theme-toggle" class="theme-toggle" style="margin-right: 2px;">
+                                    🌙
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <script>
+                        // Function to update the authentication button based on login status
+                        function updateAuthButton() {
+                        const authBtnContainer = document.getElementById("auth-btn-container");
+                        const isLoggedIn = localStorage.getItem("isLoggedIn");
+                        if (isLoggedIn) {
+                            // Replace with Logout button if user is logged in
+                            authBtnContainer.innerHTML = <a class="main-btn navbar-btn" style="padding: 2px 20px; color: rgb(237, 242, 244); animation-duration: 0.4s; animation-name: ease;" id="logout-btn">Logout 🚪</a>;
+                            // Attach click event to Logout button
+                            document.getElementById("logout-btn").addEventListener("click", function () {
+                              // Clear login data from local storage and reload page
+                            localStorage.removeItem("isLoggedIn");
+                            localStorage.removeItem("currentUser");
+                            window.location.reload();
+                            });
+                        } else {
+                            // Show Login/Register button if user is not logged in
+                            authBtnContainer.innerHTML = <a class="main-btn navbar-btn" style="padding: 2px 20px; color: rgb(237, 242, 244); animation-duration: 0.4s; animation-name: ease;" data-scroll-nav="0" href="./loginPage.html">Login/Register 💻</a>;
+                            }
+                        }
+                        // Call updateAuthButton on page load to set the correct button
+                        document.addEventListener("DOMContentLoaded", updateAuthButton);
+                        </script>
+
+                        <script>
+                            const toggleButton = document.getElementById('theme-toggle');
+                            var body = document.body;
+                            var currentTheme = localStorage.getItem('theme');
+
+                            if (currentTheme === 'dark') {
+                            body.classList.add('dark-mode');
+                            toggleButton.classList.add('dark');
+                            toggleButton.textContent = '🌞';
+                            }
+
+                            toggleButton.addEventListener('click', function () {
+                            body.classList.toggle('dark-mode');
+                            toggleButton.classList.toggle('dark');
+
+                            // Update button icon based on mode
+                            if (body.classList.contains('dark-mode')) {
+                                toggleButton.textContent = '🌞';  // Light mode icon
+                                localStorage.setItem('theme', 'dark');
+                            } else {
+                                toggleButton.textContent = '🌙';  // Dark mode icon
+                                localStorage.setItem('theme', 'light');
+                            }
+                            });
+                        </script>
+                </div>
+            </nav>
+            <link href="https://fonts.googleapis.com/css?family=Raleway&amp;display=swap" rel="stylesheet">
+
+            <nav class="mobile-menu ">
+                <a class="page-scroll" href="./index.html">Home 🏡</a>
+                <a class="page-scroll" href="./about.html">About Us 📖</a>
+                <a class="page-scroll" href="./trends.html">Trends 📈</a>
+                <a class="page-scroll" href="./tools/sip.html">Tools 🔧</a>
+                <a class="page-scroll" href="./blog.html">Blogs 📰</a>
+                <a class="page-scroll" href="./quiz.html">Quiz 🤔</a>
+                <a class="page-scroll main-btn" href="#" onclick="openModal()"
+                onmouseout="this.style.color='white'">Login/Register 💻</a>
+                <li class="nav-item no-underline">
+                <button id="theme-toggle2" class="theme-toggle2" style="margin-right: 2px;">
+                    🌙
+                </button>
+                </li>
+                <div class="mobile-menu__trigger" onclick="toggleMobileMenu()">
+                <span></span>
+                </div>
+            </nav>
+            <script>
+                const toggleBtn = document.getElementById('theme-toggle2');
+                var body = document.body;
+                var currentTheme = localStorage.getItem('theme');
+
+                if (currentTheme === 'dark') {
+                  body.classList.add('dark-mode');
+                  toggleBtn.classList.add('dark');
+                  toggleBtn.textContent = '🌞';
+                }
+
+                toggleBtn.addEventListener('click', function () {
+                  body.classList.toggle('dark-mode');
+                  toggleBtn.classList.toggle('dark');
+
+                  // Update button icon based on mode
+                  if (body.classList.contains('dark-mode')) {
+                    toggleBtn.textContent = '🌞';  // Light mode icon
+                    localStorage.setItem('theme', 'dark');
+                  } else {
+                    toggleBtn.textContent = '🌙';  // Dark mode icon
+                    localStorage.setItem('theme', 'light');
+                  }
+                });
+              </script>
+        </div>
+        <link href="../navvbar.css" rel="stylesheet">
+        <script type="text/javascript" src="./navbar.js"></script>
+    </header>
+
+    <section>
+      <div>
+        <h1>Hemanrh</h1>
+      </div>
+    </section>
+    
+</body>
+</html>

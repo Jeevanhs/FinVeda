@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="nav.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="./project/css/style.css">
+    <link rel="stylesheet" href="./project/css/dashboard.css">
+    <link rel="stylesheet" href="./project/css/forms.css">
+    <link rel="stylesheet" href="./project/css/income.css">
+    <link rel="stylesheet" href="./project/css/expenses.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <style>
+        #progressBar {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 0%;
+          height: 8px;
+          background-color: #8f6d64;
+          z-index: 9999;
+    
+        }
+    
+        * {
+          cursor: url('/assets/images/ads_click_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg'), auto;
+        }
+    
+    
+        .circle {
+          position: absolute;
+          width: 25px;
+          height: 25px;
+          border-radius: 50%;
+          pointer-events: none;
+          background: radial-gradient(circle, rgba(73, 232, 247, 0.466), rgba(141, 38, 172, 0.5));
+          transition: transform 0.1s, left 0.1s, top 0.1s;
+        }
+    
+        .circle-container {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          z-index: 9999;
+        }
+    
+        @media (max-width: 720px) {
+          .circle-container {
+            display: none;
+          }
+        }
+    
+        .scroll-btn {
+          position: fixed;
+          top: 150px;
+          right: 4px;
+          background-color: #635adc;
+          color: white;
+          border: none;
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+          font-size: 24px;
+          cursor: pointer;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+          transition: background-color 0.3s;
+          display: flex;
+          z-index: 1000;
+          justify-content: center;
+          align-items: center;
+        }
+    
+        .scroll-btn:hover {
+          background-color: #555;
+          /* Darker blue on hover */
+        }
+    
+        .dropdown-menu li a {
+          color: #ff5722;
+          /* Change this color code to any color you like */
+        }
+    
+        .dropdown-menu li a:hover {
+          color: #0a69ed;
+          /* Optional: change the color on hover */
+        }
+    
+        body.dark-mode .theme-toggle,
+        body.dark-mode .theme-toggle:hover {
+          background-color: #112a2b;
+          padding: 0.25rem 2.3rem;
+        }
+      </style>
+      <style>
+        #chat-icon {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          width: 60px;
+          height: 60px;
+          background-color: #007bff;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          box-shadow: 0 4px 6px rgba(233, 245, 10, 0.988);
+        }
+        #chat-icon img {
+          width: 30px;
+          height: 30px;
+        }
+      </style>
+    
+    <body>
+    
+      <div class="circle-container">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+      </div>
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const coords = { x: 0, y: 0 };
+          const circles = document.querySelectorAll(".circle");
+    
+          circles.forEach(function (circle) {
+            circle.x = 0;
+            circle.y = 0;
+          });
+    
+          window.addEventListener("mousemove", function (e) {
+            coords.x = e.pageX;
+            coords.y = e.pageY - window.scrollY; // Adjust for vertical scroll position
+          });
+    
+          function animateCircles() {
+            let x = coords.x;
+            let y = coords.y;
+    
+            circles.forEach(function (circle, index) {
+              circle.style.left = `${x - 12}px`;
+              circle.style.top = `${y - 12}px`;
+              circle.style.transform = `scale(${(circles.length - index) / circles.length})`;
+    
+              const nextCircle = circles[index + 1] || circles[0];
+              circle.x = x;
+              circle.y = y;
+    
+              x += (nextCircle.x - x) * 0.3;
+              y += (nextCircle.y - y) * 0.3;
+            });
+    
+            requestAnimationFrame(animateCircles);
+          }
+    
+          animateCircles();
+        });
+    
+      </script> 
+    
+    
+      <div id="progressBar"></div>
+      <script>
+        window.onscroll = function () {
+          var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+          var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          var scrolled = (winScroll / height) * 100;
+          document.getElementById("progressBar").style.width = scrolled + "%";
+        };
+      </script>
+    <button id="scrollBtn" class="scroll-btn" onclick="scrollToNextSection()">
+        <i class="lni-chevron-down"></i>
+      </button>
+      <style>
+        .scroll-btn {
+      margin-right: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px; /* Adjust the button width */
+      height: 45px; /* Adjust the button height */
+      border: none;
+      background-color:  #635adc; /* Change to your desired color */
+      border-radius: 50%; /* Makes the button circular */
+      cursor: pointer;
+      padding: 0; /* Ensures no extra space inside the button */
+      overflow: hidden; /* Ensures the icon doesn't overflow the button */
+    }
+    
+    .scroll-btn i {
+      font-size: 24px; /* Adjust icon size */
+      color: #ffffff; /* Icon color */
+      line-height: 1; /* Prevents additional space around the icon */
+      margin: 0; /* Ensures no margin around the icon */
+    }
+    
+      </style> 
+    
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          // Scroll button functionality
+          const scrollToNextSection = () => {
+            window.scrollBy({
+              top: window.innerHeight,
+              behavior: 'smooth',
+            });
+          };
+    
+          // Attach the function to the button
+          document.getElementById('scrollBtn').onclick = scrollToNextSection;
+        });
+      </script>
+    <header class="header-area fixed-top">
+        <div class="container">
+            <nav class="navbar-area">
+                <div class="navbar-wrapper">
+                    <div class="navbar-brand">
+                        <a href="./index.html">
+                            <img src="./assets/images/FinvedaLogo.png" alt="Finveda Logo" class="logo">
+                        </a>
+                    </div>
+                    <div class="navbar-search">
+                        <i class="fa-solid fa-magnifying-glass glass"></i>
+                        <div class="search-container">
+                            <input type="text" class="search-input" id="file-search" placeholder="Search for a file..." oninput="showSuggestions()" onkeydown="navigateSuggestions(event)">
+                            <div class="suggestions" id="suggestions-list"></div>
+                        </div>
+                    </div>
+                    <div class="navbar-nav border">
+                        <ul id="nav" class="navbar-nav-list">
+                            <li class="nav-item">
+                                <a class="page-scroll active-link" href="./index.html"> Home🏡</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="page-scroll" href="./about.html">About Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="page-scroll" href="./persona/index.html">Plan and Save</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="page-scroll" href="./contact.html">Contact📞</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="page-scroll" href="./faq.html">Help🙋‍♂</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="page-scroll dropdown-toggle" href="#" role="button">Explore📚</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="./finance.html">Courses📚</a></li>
+                                    <li><a href="./trends.html">Trends📈</a></li>
+                                    <li><a href="./tools/sip.html">Tools🔧</a></li>
+                                    <li><a href="./blog.html">Blogs📰</a></li>
+                                    <li><a href="./quiz.html">Quiz🤔</a></li>
+                                    <li><a href="./Games/Games.html">Games</a></li>
+                                    <li><a href="./maps.html">Maps🗺</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item no-underline" id="auth-btn-container">
+                                <a class="main-btn navbar-btn" style="padding: 5px 20px;" href="./loginPage.html">
+                                    <i class="fas fa-user-circle icon-hover"></i> Login/Register💻
+                                </a>
+                            </li>
+                            <li class="nav-item no-underline align-self-center">
+                                <button id="theme-toggle" class="theme-toggle" style="margin-right: 2px;">
+                                    🌙
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <script>
+                        // Function to update the authentication button based on login status
+                        function updateAuthButton() {
+                        const authBtnContainer = document.getElementById("auth-btn-container");
+                        const isLoggedIn = localStorage.getItem("isLoggedIn");
+                        if (isLoggedIn) {
+                            // Replace with Logout button if user is logged in
+                            authBtnContainer.innerHTML = <a class="main-btn navbar-btn" style="padding: 2px 20px; color: rgb(237, 242, 244); animation-duration: 0.4s; animation-name: ease;" id="logout-btn">Logout 🚪</a>;
+                            // Attach click event to Logout button
+                            document.getElementById("logout-btn").addEventListener("click", function () {
+                              // Clear login data from local storage and reload page
+                            localStorage.removeItem("isLoggedIn");
+                            localStorage.removeItem("currentUser");
+                            window.location.reload();
+                            });
+                        } else {
+                            // Show Login/Register button if user is not logged in
+                            authBtnContainer.innerHTML = <a class="main-btn navbar-btn" style="padding: 2px 20px; color: rgb(237, 242, 244); animation-duration: 0.4s; animation-name: ease;" data-scroll-nav="0" href="./loginPage.html">Login/Register 💻</a>;
+                            }
+                        }
+                        // Call updateAuthButton on page load to set the correct button
+                        document.addEventListener("DOMContentLoaded", updateAuthButton);
+                        </script>
+
+                        <script>
+                            const toggleButton = document.getElementById('theme-toggle');
+                            var body = document.body;
+                            var currentTheme = localStorage.getItem('theme');
+
+                            if (currentTheme === 'dark') {
+                            body.classList.add('dark-mode');
+                            toggleButton.classList.add('dark');
+                            toggleButton.textContent = '🌞';
+                            }
+
+                            toggleButton.addEventListener('click', function () {
+                            body.classList.toggle('dark-mode');
+                            toggleButton.classList.toggle('dark');
+
+                            // Update button icon based on mode
+                            if (body.classList.contains('dark-mode')) {
+                                toggleButton.textContent = '🌞';  // Light mode icon
+                                localStorage.setItem('theme', 'dark');
+                            } else {
+                                toggleButton.textContent = '🌙';  // Dark mode icon
+                                localStorage.setItem('theme', 'light');
+                            }
+                            });
+                        </script>
+                </div>
+            </nav>
+            <link href="https://fonts.googleapis.com/css?family=Raleway&amp;display=swap" rel="stylesheet">
+
+            <nav class="mobile-menu ">
+                <a class="page-scroll" href="./index.html">Home 🏡</a>
+                <a class="page-scroll" href="./about.html">About Us 📖</a>
+                <a class="page-scroll" href="./trends.html">Trends 📈</a>
+                <a class="page-scroll" href="./tools/sip.html">Tools 🔧</a>
+                <a class="page-scroll" href="./blog.html">Blogs 📰</a>
+                <a class="page-scroll" href="./quiz.html">Quiz 🤔</a>
+                <a class="page-scroll main-btn" href="#" onclick="openModal()"
+                onmouseout="this.style.color='white'">Login/Register 💻</a>
+                <li class="nav-item no-underline">
+                <button id="theme-toggle2" class="theme-toggle2" style="margin-right: 2px;">
+                    🌙
+                </button>
+                </li>
+                <div class="mobile-menu__trigger" onclick="toggleMobileMenu()">
+                <span></span>
+                </div>
+            </nav>
+            <script>
+                const toggleBtn = document.getElementById('theme-toggle2');
+                var body = document.body;
+                var currentTheme = localStorage.getItem('theme');
+
+                if (currentTheme === 'dark') {
+                  body.classList.add('dark-mode');
+                  toggleBtn.classList.add('dark');
+                  toggleBtn.textContent = '🌞';
+                }
+
+                toggleBtn.addEventListener('click', function () {
+                  body.classList.toggle('dark-mode');
+                  toggleBtn.classList.toggle('dark');
+
+                  // Update button icon based on mode
+                  if (body.classList.contains('dark-mode')) {
+                    toggleBtn.textContent = '🌞';  // Light mode icon
+                    localStorage.setItem('theme', 'dark');
+                  } else {
+                    toggleBtn.textContent = '🌙';  // Dark mode icon
+                    localStorage.setItem('theme', 'light');
+                  }
+                });
+              </script>
+        </div>
+        <link href="./navvbar.css" rel="stylesheet">
+        <script type="text/javascript" src="./navbar.js"></script>
+    </header>
+
+    <main class="content-wrapper">
+        <button class="nav-toggle" id="navToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav class="navbar">
+            <div class="icon">Rural Finance Manager</div>
+            <div class="nav-links">
+                <button id="dashboardBtn" class="nav-btn active">
+                    <i class="fas fa-home"></i> Dashboard
+                </button>
+                <button id="incomeBtn" class="nav-btn">
+                    <i class="fas fa-money-bill-wave"></i> Income
+                </button>
+                <button id="expensesBtn" class="nav-btn">
+                    <i class="fas fa-shopping-cart"></i> Expenses
+                </button>
+                <button id="savingsBtn" class="nav-btn">
+                    <i class="fas fa-piggy-bank"></i> Savings Goals
+                </button>
+                <button id="resourcesBtn" class="nav-btn">
+                    <i class="fas fa-book"></i> Resources
+                </button>
+            </div>
+            <select id="languageSelect" class="language-selector">
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="hi">हिंदी</option>
+            </select>
+        </nav>
+        <main>
+            <h1>Personal Finance</h1>
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="section active">
+                <div class="dashboard-grid">
+                    <div class="card summary-card">
+                        <h2>Financial Summary</h2>
+                        <div class="summary-stats">
+                            <div class="stat">
+                                <span class="label">Total Income</span>
+                                <span class="value" id="totalIncome">₹0</span>
+                            </div>
+                            <div class="stat">
+                                <span class="label">Total Balance</span>
+                                <span class="value" id="totalBalance">₹0</span>
+                            </div>
+                            <div class="stat">
+                                <span class="label">Monthly Savings</span>
+                                <span class="value" id="monthlySavings">₹0</span>
+                            </div>
+                            <div class="stat">
+                                <span class="label">Total Expenses</span>
+                                <span class="value" id="totalExpenses">₹0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card chart-card">
+                        <h2>Income vs Expenses</h2>
+                        <canvas id="financeChart"></canvas>
+                    </div>
+                    <div class="card goals-card">
+                        <h2>Savings Goals</h2>
+                        <div id="goalsList" class="goals-list"></div>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- Income Section -->
+            <section id="income" class="section">
+                <div class="income-container">
+                    <div class="card add-income-form">
+                        <h2>Record New Income</h2>
+                        <form id="incomeForm">
+                            <div class="form-group">
+                                <label for="incomeAmount">Amount</label>
+                                <input type="number" id="incomeAmount" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="incomeSource">Source</label>
+                                <select id="incomeSource" required>
+                                    <option value="farming">Farming</option>
+                                    <option value="livestock">Livestock</option>
+                                    <option value="business">Small Business</option>
+                                    <option value="salary">Salary</option>
+                                    <option value="others">Others</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="incomeDate">Date</label>
+                                <input type="date" id="incomeDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="incomeNotes">Notes</label>
+                                <textarea id="incomeNotes"></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary">Add Income</button>
+                        </form>
+                    </div>
+                    <div class="card income-list">
+                        <h2>Income History</h2>
+                        <div id="incomeList"></div>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- Expenses Section -->
+            <section id="expenses" class="section">
+                <div class="expenses-container">
+                    <div class="card add-expense-form">
+                        <h2>Add New Expense</h2>
+                        <form id="expenseForm">
+                            <div class="form-group">
+                                <label for="expenseAmount">Amount</label>
+                                <input type="number" id="expenseAmount" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="expenseCategory">Category</label>
+                                <select id="expenseCategory" required>
+                                    <option value="food">Food</option>
+                                    <option value="transportation">Transportation</option>
+                                    <option value="utilities">Utilities</option>
+                                    <option value="healthcare">Healthcare</option>
+                                    <option value="education">Education</option>
+                                    <option value="farming">Farming Supplies</option>
+                                    <option value="others">Others</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="expenseDate">Date</label>
+                                <input type="date" id="expenseDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="expenseNotes">Notes</label>
+                                <textarea id="expenseNotes"></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary">Add Expense</button>
+                        </form>
+                    </div>
+                    <div class="card expense-list">
+                        <h2>Recent Expenses</h2>
+                        <div id="expensesList"></div>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- Savings Goals Section -->
+            <section id="savings" class="section">
+                <div class="savings-container">
+                    <div class="card add-goal-form">
+                        <h2>Create New Savings Goal</h2>
+                        <form id="savingsGoalForm">
+                            <div class="form-group">
+                                <label for="goalName">Goal Name</label>
+                                <input type="text" id="goalName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="targetAmount">Target Amount</label>
+                                <input type="number" id="targetAmount" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="targetDate">Target Date</label>
+                                <input type="date" id="targetDate" required>
+                            </div>
+                            <button type="submit" class="btn-primary">Create Goal</button>
+                        </form>
+                    </div>
+                    <div class="card goals-progress">
+                        <h2>Your Savings Goals</h2>
+                        <div id="goalsProgressList"></div>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- Resources Section -->
+            <section id="resources" class="section">
+                <div class="resources-grid">
+                    <div class="card article-card">
+                        <h2>Financial Education</h2>
+                        <div class="articles-list" id="articlesList"></div>
+                    </div>
+                    <div class="card calculator-card">
+                        <h2>Financial Calculators</h2>
+                        <div class="calculators-list">
+                            <button class="calculator-btn" data-calculator="savings">Savings Calculator</button>
+                            <button class="calculator-btn" data-calculator="loan">Loan Calculator</button>
+                            <button class="calculator-btn" data-calculator="interest">Interest Calculator</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div>
+                Hemanth
+                <div>
+                    <h1>
+                        Hemanth
+                    </h1>
+                </div>
+            </div>
+        </main>
+    </main>
+    <script src="./project/js/utils.js"></script>
+    <script src="./project/js/storage.js"></script>
+    <script src="./project/js/translations.js"></script>
+    <script src="./project/js/savings.js"></script>
+    <script src="./project/js/expenses.js"></script>
+    <script src="./project/js/income.js"></script>
+    <script src="./project/js/charts.js"></script>
+    <script src="./project/js/resources.js"></script>
+    <script src="./project/js/app.js"></script>
+    <script src="./project/js/dashboard.js"></script>
+    <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2024/12/01/09/20241201093125-6GFIK1RD.js"></script>
+
+<script>
+  // Initialize Botpress webchat
+  window.botpressWebChat.init({
+    configUrl: "https://files.bpcontent.cloud/2024/12/01/09/20241201093125-6GFIK1RD.json",
+    hideWidget: true // Initially hide the widget
+  });
+
+  // Toggle chat visibility when icon is clicked
+  document.getElementById("chat-icon").addEventListener("click", function() {
+    window.botpressWebChat.toggle(); // Toggle between show/hide
+  });
+</script>
+</body>
+</html>

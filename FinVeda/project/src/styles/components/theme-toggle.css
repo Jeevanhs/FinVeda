@@ -1,0 +1,32 @@
+/* Theme Toggle Component Styles */
+.theme-toggle {
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 20px;
+    width: 4.5rem;
+    height: 2rem;
+    background-color: #9193faeb;
+    display: flex;
+    align-items: center;
+    padding: 0.25rem;
+    transition: all 0.5s ease-in-out;
+}
+
+.theme-toggle:hover {
+    background-color: #9193faeb;
+}
+
+body.dark-mode .theme-toggle,
+body.dark-mode .theme-toggle:hover {
+    background-color: #112a2b;
+}
+
+.theme-toggle span {
+    transition: all 0.5s ease-in-out;
+}
+
+body.dark-mode .theme-toggle span {
+    transform: translateX(1.95rem);
+}

@@ -1,0 +1,21 @@
+/* Responsive Design Styles */
+@media (max-width: 768px) {
+    .navbar-wrapper {
+        flex-direction: column;
+    }
+
+    .navbar-nav-list {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .search-container {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1320px) {
+    .navbar-nav {
+        gap: 3px;
+    }
+}

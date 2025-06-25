@@ -1,0 +1,123 @@
+/* Form Container Styles */
+.expenses-container,
+.savings-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-unit);
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Form Card Styles */
+.add-expense-form,
+.add-goal-form {
+    position: sticky;
+    top: var(--spacing-unit);
+    max-height: calc(100vh - var(--header-height) - var(--spacing-unit) * 2);
+    overflow-y: auto;
+}
+
+/* List Styles */
+.expense-list,
+.goals-progress {
+    height: calc(100vh - var(--header-height) - var(--spacing-unit) * 2);
+    overflow-y: auto;
+}
+
+.expense-item,
+.goal-item {
+    padding: var(--spacing-unit);
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.expense-item:last-child,
+.goal-item:last-child {
+    border-bottom: none;
+}
+
+.expense-details,
+.goal-details {
+    flex-grow: 1;
+}
+
+.expense-amount,
+.goal-amount {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.expense-date,
+.goal-date {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.expense-category {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    background-color: #e9ecef;
+    color: var(--primary-color);
+}
+
+/* Form Input Styles */
+.form-group {
+    margin-bottom: var(--spacing-unit);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+    max-height: 200px;
+}
+
+/* Button Styles */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-edit,
+.btn-delete {
+    padding: 4px 8px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.btn-edit {
+    background-color: #ffd700;
+    color: var(--primary-color);
+}
+
+.btn-delete {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+/* Scrollbar Styles */
+.expense-list::-webkit-scrollbar,
+.goals-progress::-webkit-scrollbar {
+    width: 6px;
+}
+
+.expense-list::-webkit-scrollbar-track,
+.goals-progress::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.expense-list::-webkit-scrollbar-thumb,
+.goals-progress::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border-radius: 3px;
+}
+
+.expense-list::-webkit-scrollbar-thumb:hover,
+.goals-progress::-webkit-scrollbar-thumb:hover {
+    background: #2980b9;
+}

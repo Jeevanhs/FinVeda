@@ -1,0 +1,81 @@
+/* Income Form Styles */
+.income-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-unit);
+    height: 100%;
+    overflow: hidden;
+}
+
+.add-income-form {
+    position: sticky;
+    top: var(--spacing-unit);
+    max-height: calc(100vh - var(--header-height) - var(--spacing-unit) * 2);
+    overflow-y: auto;
+}
+
+.income-list {
+    height: calc(100vh - var(--header-height) - var(--spacing-unit) * 2);
+    overflow-y: auto;
+}
+
+.income-item {
+    padding: var(--spacing-unit);
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.income-item:last-child {
+    border-bottom: none;
+}
+
+.income-details {
+    flex-grow: 1;
+}
+
+.income-amount {
+    font-weight: bold;
+    color: #27ae60;
+    font-size: 1.2rem;
+}
+
+.income-source {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    background-color: #e9ecef;
+    color: var(--primary-color);
+    margin: 4px 0;
+}
+
+.income-date {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.income-notes {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 4px;
+}
+
+/* Income List Scrollbar */
+.income-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.income-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.income-list::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border-radius: 3px;
+}
+
+.income-list::-webkit-scrollbar-thumb:hover {
+    background: #2980b9;
+}

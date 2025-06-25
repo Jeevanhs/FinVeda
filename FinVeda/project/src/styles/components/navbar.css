@@ -1,0 +1,48 @@
+/* Navbar Component Styles */
+.navbar-area {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.navbar-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+
+.navbar-brand .logo {
+    height: 50px;
+}
+
+/* Navigation Items */
+.navbar-nav-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    list-style-type: none;
+    gap: 10px;
+}
+
+.nav-item {
+    position: relative;
+    display: inline-block;
+}
+
+.nav-item a {
+    color: #fff;
+    font-size: 17px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+}
+
+.nav-item a:hover {
+    color: #0a69ed;
+    transform: scale(0.95);
+}

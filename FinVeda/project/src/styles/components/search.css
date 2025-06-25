@@ -1,0 +1,41 @@
+/* Search Component Styles */
+.navbar-search {
+    display: flex;
+    align-items: center;
+    position: relative;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.search-container {
+    position: relative;
+    width: 70%;
+    max-width: 400px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px 40px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 16px;
+}
+
+.glass {
+    position: absolute;
+    left: 10px;
+    font-size: 24px;
+    color: #888;
+}
+
+.suggestions {
+    position: absolute;
+    background-color: #fff;
+    color: #000;
+    width: 100%;
+    z-index: 1;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: none;
+}

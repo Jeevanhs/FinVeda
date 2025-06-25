@@ -1,0 +1,77 @@
+/* Dashboard Grid Layout */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-unit);
+    padding: var(--spacing-unit);
+    height: 100%;
+    overflow-y: auto;
+}
+
+/* Summary Card Styles */
+.summary-card .summary-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--spacing-unit);
+    margin-top: var(--spacing-unit);
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-unit);
+    background-color: #f8f9fa;
+    border-radius: var(--border-radius);
+}
+
+.stat .label {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.stat .value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* Chart Card Styles */
+.chart-card {
+    height: 300px;
+    position: relative;
+}
+
+.chart-card canvas {
+    max-height: 100%;
+}
+
+/* Goals Card Styles */
+.goals-card .goals-list {
+    margin-top: var(--spacing-unit);
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.goal-item {
+    padding: var(--spacing-unit);
+    border-bottom: 1px solid #eee;
+}
+
+.goal-item:last-child {
+    border-bottom: none;
+}
+
+.goal-progress {
+    margin-top: 8px;
+    background-color: #eee;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: var(--secondary-color);
+    transition: width 0.3s ease;
+}

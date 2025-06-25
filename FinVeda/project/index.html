@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rural Finance Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/income.css">
+    <link rel="stylesheet" href="css/expenses.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <button class="nav-toggle" id="navToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <nav class="navbar">
+        <div class="icon">Rural Finance Manager</div>
+        <div class="nav-links">
+            <button id="dashboardBtn" class="nav-btn active">
+                <i class="fas fa-home"></i> Dashboard
+            </button>
+            <button id="incomeBtn" class="nav-btn">
+                <i class="fas fa-money-bill-wave"></i> Income
+            </button>
+            <button id="expensesBtn" class="nav-btn">
+                <i class="fas fa-shopping-cart"></i> Expenses
+            </button>
+            <button id="savingsBtn" class="nav-btn">
+                <i class="fas fa-piggy-bank"></i> Savings Goals
+            </button>
+            <button id="resourcesBtn" class="nav-btn">
+                <i class="fas fa-book"></i> Resources
+            </button>
+        </div>
+        <select id="languageSelect" class="language-selector">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="hi">हिंदी</option>
+        </select>
+    </nav>
+
+    <main>
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section active">
+            <div class="dashboard-grid">
+                <div class="card summary-card">
+                    <h2>Financial Summary</h2>
+                    <div class="summary-stats">
+                        <div class="stat">
+                            <span class="label">Total Income</span>
+                            <span class="value" id="totalIncome">₹0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">Total Balance</span>
+                            <span class="value" id="totalBalance">₹0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">Monthly Savings</span>
+                            <span class="value" id="monthlySavings">₹0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">Total Expenses</span>
+                            <span class="value" id="totalExpenses">₹0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card chart-card">
+                    <h2>Income vs Expenses</h2>
+                    <canvas id="financeChart"></canvas>
+                </div>
+                <div class="card goals-card">
+                    <h2>Savings Goals</h2>
+                    <div id="goalsList" class="goals-list"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Income Section -->
+        <section id="income" class="section">
+            <div class="income-container">
+                <div class="card add-income-form">
+                    <h2>Record New Income</h2>
+                    <form id="incomeForm">
+                        <div class="form-group">
+                            <label for="incomeAmount">Amount</label>
+                            <input type="number" id="incomeAmount" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="incomeSource">Source</label>
+                            <select id="incomeSource" required>
+                                <option value="farming">Farming</option>
+                                <option value="livestock">Livestock</option>
+                                <option value="business">Small Business</option>
+                                <option value="salary">Salary</option>
+                                <option value="others">Others</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="incomeDate">Date</label>
+                            <input type="date" id="incomeDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="incomeNotes">Notes</label>
+                            <textarea id="incomeNotes"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Add Income</button>
+                    </form>
+                </div>
+                <div class="card income-list">
+                    <h2>Income History</h2>
+                    <div id="incomeList"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expenses Section -->
+        <section id="expenses" class="section">
+            <div class="expenses-container">
+                <div class="card add-expense-form">
+                    <h2>Add New Expense</h2>
+                    <form id="expenseForm">
+                        <div class="form-group">
+                            <label for="expenseAmount">Amount</label>
+                            <input type="number" id="expenseAmount" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="expenseCategory">Category</label>
+                            <select id="expenseCategory" required>
+                                <option value="food">Food</option>
+                                <option value="transportation">Transportation</option>
+                                <option value="utilities">Utilities</option>
+                                <option value="healthcare">Healthcare</option>
+                                <option value="education">Education</option>
+                                <option value="farming">Farming Supplies</option>
+                                <option value="others">Others</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="expenseDate">Date</label>
+                            <input type="date" id="expenseDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="expenseNotes">Notes</label>
+                            <textarea id="expenseNotes"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Add Expense</button>
+                    </form>
+                </div>
+                <div class="card expense-list">
+                    <h2>Recent Expenses</h2>
+                    <div id="expensesList"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Savings Goals Section -->
+        <section id="savings" class="section">
+            <div class="savings-container">
+                <div class="card add-goal-form">
+                    <h2>Create New Savings Goal</h2>
+                    <form id="savingsGoalForm">
+                        <div class="form-group">
+                            <label for="goalName">Goal Name</label>
+                            <input type="text" id="goalName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="targetAmount">Target Amount</label>
+                            <input type="number" id="targetAmount" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="targetDate">Target Date</label>
+                            <input type="date" id="targetDate" required>
+                        </div>
+                        <button type="submit" class="btn-primary">Create Goal</button>
+                    </form>
+                </div>
+                <div class="card goals-progress">
+                    <h2>Your Savings Goals</h2>
+                    <div id="goalsProgressList"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources" class="section">
+            <div class="resources-grid">
+                <div class="card article-card">
+                    <h2>Financial Education</h2>
+                    <div class="articles-list" id="articlesList"></div>
+                </div>
+                <div class="card calculator-card">
+                    <h2>Financial Calculators</h2>
+                    <div class="calculators-list">
+                        <button class="calculator-btn" data-calculator="savings">Savings Calculator</button>
+                        <button class="calculator-btn" data-calculator="loan">Loan Calculator</button>
+                        <button class="calculator-btn" data-calculator="interest">Interest Calculator</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/utils.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/income.js"></script>
+    <script src="js/expenses.js"></script>
+    <script src="js/savings.js"></script>
+    <script src="js/resources.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

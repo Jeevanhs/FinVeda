@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Webchat Integration</title>
+  <style>
+    /* Customize the chat window (widget) */
+    .bp-webchat {
+      background-color: #f8f8f8 !important;  /* Light grey background */
+      border-radius: 12px !important; /* Rounded corners */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+      width: 380px !important; /* Fixed width */
+      height: 450px !important; /* Fixed height */
+      font-family: 'Arial', sans-serif !important; /* Custom font */
+    }
+  
+    /* Customize the chat header */
+    .bp-webchat-header {
+      background-color: #4CAF50 !important;  /* Green header */
+      color: #fff !important;  /* White text */
+      font-size: 18px !important; /* Larger font size */
+      border-top-left-radius: 12px !important;  /* Rounded top-left corner */
+      border-top-right-radius: 12px !important;  /* Rounded top-right corner */
+    }
+  
+    /* Customize user messages (user bubble) */
+    .bp-webchat-message.bp-webchat-message-user {
+      background-color: #d0f8c0 !important; /* Light green */
+      color: #333 !important; /* Dark text */
+      border-radius: 15px !important;  /* Rounded corners for the bubble */
+      padding: 8px 15px !important;  /* Padding inside the bubble */
+    }
+  
+    /* Customize bot messages (bot bubble) */
+    .bp-webchat-message.bp-webchat-message-bot {
+      background-color: #f0f0f0 !important;  /* Light grey */
+      color: #333 !important;  /* Dark text */
+      border-radius: 15px !important; /* Rounded corners */
+      padding: 8px 15px !important;  /* Padding inside the bubble */
+    }
+  
+    /* Customize the message input field */
+    .bp-webchat-input {
+      background-color: #f8f8f8 !important;  /* Light grey background */
+      border: 1px solid #ccc !important;  /* Border color */
+      border-radius: 25px !important;  /* Rounded corners */
+      padding: 10px 15px !important;  /* Padding inside input */
+      font-size: 16px !important;  /* Larger text size */
+    }
+  
+    /* Customize the send button */
+    .bp-webchat-send-button {
+      background-color: #4CAF50 !important;  /* Green button */
+      color: #fff !important;  /* White text */
+      font-size: 18px !important;  /* Larger text on the button */
+      border-radius: 50% !important;  /* Circular button */
+      transition: background-color 0.3s ease;
+    }
+  
+    /* Hover effect for send button */
+    .bp-webchat-send-button:hover {
+      background-color: #45a049 !important; /* Darker green on hover */
+    }
+  
+    /* Customize the loading indicator */
+    .bp-webchat-loading {
+      background-color: #4CAF50 !important; /* Green background */
+      width: 50px !important; /* Size */
+      height: 50px !important; /* Size */
+      border-radius: 50% !important; /* Circular loading */
+    }
+  </style>
+  
+  
+</head>
+<body>
+
+<!-- Botpress Webchat Scripts -->
+<script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2024/12/01/09/20241201093125-6GFIK1RD.js"></script>
+
+<script>
+  // Initialize Botpress webchat
+  window.botpressWebChat.init({
+    configUrl: "https://files.bpcontent.cloud/2024/12/01/09/20241201093125-6GFIK1RD.json",
+    hideWidget: true // Initially hide the widget
+  });
+
+  // Toggle chat visibility when icon is clicked
+  document.getElementById("chat-icon").addEventListener("click", function() {
+    window.botpressWebChat.toggle(); // Toggle between show/hide
+  });
+  
+</script>
+
+
+</body>
+</html>
